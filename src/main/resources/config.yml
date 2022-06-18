@@ -1,0 +1,126 @@
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  database: 'seniorparkour'
+  username: 'seniorparkour'
+  password: ''
+
+parkour:
+  # Default: 60
+  # Setting to 0 or an invalid value will go back to the default value
+  timeout: 60
+
+gui:
+  top:
+    gui-name: '&f%parkour% &bLeaderboard'
+    item:
+      name: '&e%player%'
+      lore:
+        - '&6Time: &f%time%'
+        - '&cPosition: &e%position%'
+  info:
+    gui-name: '&f%parkour% &bInfo'
+    start-point:
+      item: 'DIAMOND'
+      name: '&a%parkour% &eStart'
+      lore:
+        - '&aStarting point for the parkour'
+        - '&7Location: &f%location%'
+        - ''
+        - '&eClick to teleport!'
+    checkpoint:
+      item: 'COMPASS'
+      name: '&a%parkour% &eCheckpoint #%checkpoint%'
+      lore:
+        - '&aCheckpoint in the parkour'
+        - '&7Location: &f%location%'
+        - ''
+        - '&eClick to teleport'
+    end-point:
+      item: 'BEDROCK'
+      name: '&a%parkour% &eEnd'
+      lore:
+        - '&aEnding point for the parkour'
+        - '&7Location: &f%location%'
+        - ''
+        - '&eClick to teleport!'
+  stats:
+    gui-name: '%player%''s Parkour Stats'
+    item:
+      name: '&e%player%'
+      lore:
+        - '&7Course: &f%parkour%'
+        - '&7Time: &f%time%'
+
+holograms:
+  # Default: 0
+  height: 0
+  # Placeholders:
+  # %parkour% - Name of the parkour
+  # %checkpoint% - Number of the checkpoint
+  start:
+    - '&a&l%parkour% &e&lStart'
+    - '&6Click to start!'
+  checkpoint:
+    - '&a&l%parkour% &e&lCheckpoint #%checkpoint%'
+    - '&6Click to pass!'
+  end:
+    - '&a&l%parkour% &e&lEnd'
+    - '&6&lClick to finish!'
+
+messages:
+  prefix: '&8[&bSenior&fParkour&8]'
+  help:
+    header: '&8---------[ &bSenior&fParkour &8]---------'
+    footer: '&8--------------------------------'
+    # These message settings will change how the help menu will look
+    # command - The colour the command (i.e. /parkour create <name>) should be
+    # separator - The character used to separate the command and description (i.e. %command% &8- %description)
+    # description - The colour the description (i.e. Creates a parkour course) should be
+    format:
+      command: '&e'
+      separator: ' &8- '
+      description: '&f'
+  commands:
+    checkpoint: 'Creates a checkpoint in parkour <name>.'
+    create: 'Creates a parkour called <name>.'
+    delete: 'Deletes the parkour called <name>, or the checkpoint [checkpoint].'
+    end: 'Sets the end for parkour <name>.'
+    teleport: 'Teleports you to the parkour called <name> or the checkpoint [checkpoint].'
+    info: 'Opens a GUI with information on the parkour called <name>.'
+    stats: 'Opens a GUI showing all parkour statistics for player <player>.'
+    reload: 'Reloads the plugin config.yml.'
+  # Placeholders:
+  # %prefix% - The plugin message prefix
+  # %args#% - Arguments placeholder for messages
+  # ^ This placeholder can only be used in messages that already contain it, but is not required.
+  errors:
+    unknown-command: '%prefix% &cUnknown command!'
+    insufficient-permissions: '%prefix% &cInsufficient permissions!'
+    players-only: '%prefix% &cOnly players can use this command!'
+    invalid-usage: '%prefix% &cInvalid usage: &e%args0%'
+    invalid-parkour: '%prefix% &cParkour course &e%args0% &cdoesn''t exist!'
+    invalid-checkpoint: '%prefix% &cInvalid checkpoint specified!'
+    parkour-name-taken: '%prefix% &cParkour course &e%args0% &calready exists!'
+    already-in-parkour: '%prefix% &cYou have already joined this parkour course!'
+    must-leave-parkour: '%prefix% &cYou must leave the current parkour course before joining a different one!'
+    already-passed-checkpoint: '%prefix% &cYou have already passed this checkpoint!'
+    must-pass-previous-checkpoint: '%prefix% &cYou must pass the previous checkpoint before passing this one!'
+    not-in-parkour: '%prefix% &cYou have not joined that parkour course!'
+    parkour-timeout: '%prefix% &cYou have timed out from the parkour!'
+    no-end-point: '%prefix% &cYou cannot start this parkour course because there is no end point set!'
+    invalid-player: '%prefix% &cSpecified player is invalid or offline!'
+    no-player-data-to-show: '%prefix% &cThere are no parkour stats to show for the specified player!'
+    no-parkour-data-to-show: '%prefix% &cThere are no parkour stats to show for the specified parkour!'
+  success:
+    parkour-created: '%prefix% &aSuccessfully created parkour course &e%args0%&a!'
+    checkpoint-created: '%prefix% &aSucccessfully created &echeckpoint %args0% &ain parkour course &e%args1%&a!'
+    end-point-set: '%prefix% &aSuccessfully set the end point for parkour course &e%args0%&a!'
+    parkour-deleted: '%prefix% &aSuccessfully deleted parkour course &e%args0%&a!'
+    checkpoint-deleted: '%prefix% &aSuccessfully deleted &echeckpoint %args0% &ain parkour course &e%args1%&a!'
+    parkour-teleported: '%prefix% &aTeleported to parkour course &e%args0%&a!'
+    checkpoint-teleported: '%prefix% &aTeleported to &echeckpoint %args0% &ain parkour course &e%args1%&a!'
+    started-parkour: '%prefix% &aYou have started the parkour course &e%args0%&a!'
+    passed-checkpoint: '%prefix% &aYou have passed &echeckpoint %args0% &ain parkour course &e%args1%&a!'
+    finished-parkour: '%prefix% &aYou have finished the parkour course &e%args0%&a in &e%args1%&a!'
+    config-reloaded: '%prefix% &aSuccessfully reloaded the config.yml!'

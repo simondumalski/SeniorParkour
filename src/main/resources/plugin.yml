@@ -1,0 +1,36 @@
+name: SeniorParkour
+description: '${project.description}'
+version: '${project.version}'
+authors: [ Saymoan ]
+main: me.simondumalski.seniorparkour.Main
+api-version: 1.18
+prefix: SeniorParkour
+commands:
+  parkour:
+    description: Allows players to view their parkour stats, and admins to create parkour courses
+permissions:
+  parkour.admin:
+    description: Gives access to all /parkour admin commands
+    default: op
+    children:
+      parkour.admin.create: true
+      parkour.admin.checkpoint: true
+      parkour.admin.end: true
+      parkour.admin.delete: true
+      parkour.admin.teleport: true
+  parkour.admin.create:
+    description: Gives access to /parkour create
+  parkour.admin.checkpoint:
+    description: Gives access to /parkour checkpoint
+  parkour.admin.end:
+    description: Gives access to /parkour end
+  parkour.admin.delete:
+    description: Gives access to /parkour delete
+  parkour.admin.teleport:
+    description: Gives access to /parkour teleport
+  parkour.top:
+    default: true
+    description: Gives access to /parkour top
+  parkour.stats:
+    default: true
+    description: Gives access to /parkour stats
