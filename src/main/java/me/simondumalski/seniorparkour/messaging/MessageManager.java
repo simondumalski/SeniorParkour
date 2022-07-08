@@ -1,9 +1,7 @@
-package me.simondumalski.seniorparkour.managers;
+package me.simondumalski.seniorparkour.messaging;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.utils.Log;
-import me.simondumalski.seniorparkour.utils.Message;
-import me.simondumalski.seniorparkour.utils.SubCommand;
+import me.simondumalski.seniorparkour.commands.SubCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -12,7 +10,7 @@ import java.util.logging.Level;
 
 public class MessageManager {
 
-    private static final Main plugin = Main.getInstance();
+    private static Main plugin;
 
     /**
      * Sends a message from the config.yml to the provided CommandSender
@@ -139,6 +137,10 @@ public class MessageManager {
         //Send the footer to the CommandSender
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', footer));
 
+    }
+
+    public static void setPlugin(Main plugin) {
+        MessageManager.plugin = plugin;
     }
 
 }

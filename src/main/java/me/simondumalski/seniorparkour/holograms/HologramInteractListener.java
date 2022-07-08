@@ -1,11 +1,10 @@
-package me.simondumalski.seniorparkour.listeners;
+package me.simondumalski.seniorparkour.holograms;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.managers.MessageManager;
-import me.simondumalski.seniorparkour.managers.TrialManager;
-import me.simondumalski.seniorparkour.utils.Message;
-import me.simondumalski.seniorparkour.utils.Parkour;
-import org.bukkit.ChatColor;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.parkour.TrialManager;
+import me.simondumalski.seniorparkour.messaging.Message;
+import me.simondumalski.seniorparkour.parkour.Parkour;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -18,7 +17,15 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
 public class HologramInteractListener implements Listener {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
+
+    /**
+     * Constructor for the HologramInteractListener
+     * @param plugin Instance of the main plugin class
+     */
+    public HologramInteractListener(Main plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent e) {

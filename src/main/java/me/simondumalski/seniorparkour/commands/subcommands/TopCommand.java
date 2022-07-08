@@ -1,9 +1,10 @@
 package me.simondumalski.seniorparkour.commands.subcommands;
 
-import me.simondumalski.seniorparkour.managers.MessageManager;
-import me.simondumalski.seniorparkour.utils.Message;
-import me.simondumalski.seniorparkour.utils.Parkour;
-import me.simondumalski.seniorparkour.utils.SubCommand;
+import me.simondumalski.seniorparkour.Main;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.messaging.Message;
+import me.simondumalski.seniorparkour.parkour.Parkour;
+import me.simondumalski.seniorparkour.commands.SubCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
@@ -13,6 +14,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class TopCommand extends SubCommand {
+
+    /**
+     * Constructor for SubCommands
+     * @param plugin Instance of the main plugin class
+     */
+    public TopCommand(Main plugin) {
+        super(plugin);
+    }
 
     @Override
     public String getCommand() {

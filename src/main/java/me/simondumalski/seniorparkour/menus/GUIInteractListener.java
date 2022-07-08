@@ -1,10 +1,9 @@
-package me.simondumalski.seniorparkour.listeners;
+package me.simondumalski.seniorparkour.menus;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.managers.MessageManager;
-import me.simondumalski.seniorparkour.utils.Message;
-import me.simondumalski.seniorparkour.utils.Parkour;
-import org.bukkit.ChatColor;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.messaging.Message;
+import me.simondumalski.seniorparkour.parkour.Parkour;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +12,15 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class GUIInteractListener implements Listener {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
+
+    /**
+     * Constructor for the GUIInteractListener
+     * @param plugin Instance of the main plugin class
+     */
+    public GUIInteractListener(Main plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {

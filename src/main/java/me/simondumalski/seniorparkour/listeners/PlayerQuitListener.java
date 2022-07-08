@@ -8,8 +8,15 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerQuitListener implements Listener {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
 
+    /**
+     * Constructor for the PlayerQuitListener
+     * @param plugin Instance of the main plugin class
+     */
+    public PlayerQuitListener(Main plugin) {
+        this.plugin = plugin;
+    }
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
 

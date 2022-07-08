@@ -2,10 +2,8 @@ package me.simondumalski.seniorparkour.commands;
 
 import me.simondumalski.seniorparkour.Main;
 import me.simondumalski.seniorparkour.commands.subcommands.*;
-import me.simondumalski.seniorparkour.managers.MessageManager;
-import me.simondumalski.seniorparkour.utils.Message;
-import me.simondumalski.seniorparkour.utils.SubCommand;
-import org.bukkit.ChatColor;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.messaging.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -17,20 +15,26 @@ import java.util.List;
 
 public class ParkourCommand implements TabExecutor {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
     private List<SubCommand> subCommands = new ArrayList<>();
 
-    public ParkourCommand() {
+    /**
+     * Constructor for the ParkourCommand
+     * @param plugin Instance of the main plugin class
+     */
+    public ParkourCommand(Main plugin) {
 
-        subCommands.add(new CheckpointCommand());
-        subCommands.add(new CreateCommand());
-        subCommands.add(new DeleteCommand());
-        subCommands.add(new EndCommand());
-        subCommands.add(new InfoCommand());
-        subCommands.add(new ReloadCommand());
-        subCommands.add(new StatsCommand());
-        subCommands.add(new TeleportCommand());
-        subCommands.add(new TopCommand());
+        this.plugin = plugin;
+
+        subCommands.add(new CheckpointCommand(this.plugin));
+        subCommands.add(new CreateCommand(this.plugin));
+        subCommands.add(new DeleteCommand(this.plugin));
+        subCommands.add(new EndCommand(this.plugin));
+        subCommands.add(new InfoCommand(this.plugin));
+        subCommands.add(new ReloadCommand(this.plugin));
+        subCommands.add(new StatsCommand(this.plugin));
+        subCommands.add(new TeleportCommand(this.plugin));
+        subCommands.add(new TopCommand(this.plugin));
 
     }
 

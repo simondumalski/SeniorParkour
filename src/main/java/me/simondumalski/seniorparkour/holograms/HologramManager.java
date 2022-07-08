@@ -1,22 +1,28 @@
-package me.simondumalski.seniorparkour.managers;
+package me.simondumalski.seniorparkour.holograms;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.utils.Parkour;
+import me.simondumalski.seniorparkour.parkour.Parkour;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class HologramManager {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
     private final HashMap<Location, List<ArmorStand>> hologramsList = new HashMap<>();
+
+    /**
+     * Constructor for the HologramManager
+     * @param plugin Instance of the main plugin class
+     */
+    public HologramManager(Main plugin) {
+        this.plugin = plugin;
+    }
 
     /**
      * Creates a Hologram at the specified location

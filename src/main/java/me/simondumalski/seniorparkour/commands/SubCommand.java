@@ -1,4 +1,4 @@
-package me.simondumalski.seniorparkour.utils;
+package me.simondumalski.seniorparkour.commands;
 
 import me.simondumalski.seniorparkour.Main;
 import org.bukkit.entity.Player;
@@ -12,7 +12,15 @@ public abstract class SubCommand {
      * Instance of the Main plugin class.
      * Used for accessing the plugin managers.
      */
-    public final Main plugin = Main.getInstance();
+    protected final Main plugin;
+
+    /**
+     * Constructor for SubCommands
+     * @param plugin Instance of the main plugin class
+     */
+    public SubCommand(Main plugin) {
+        this.plugin = plugin;
+    }
 
     /**
      * Returns the command as a string

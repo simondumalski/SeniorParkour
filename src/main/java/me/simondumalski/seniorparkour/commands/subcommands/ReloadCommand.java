@@ -1,13 +1,22 @@
 package me.simondumalski.seniorparkour.commands.subcommands;
 
-import me.simondumalski.seniorparkour.managers.MessageManager;
-import me.simondumalski.seniorparkour.utils.Message;
-import me.simondumalski.seniorparkour.utils.SubCommand;
+import me.simondumalski.seniorparkour.Main;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.messaging.Message;
+import me.simondumalski.seniorparkour.commands.SubCommand;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
 public class ReloadCommand extends SubCommand {
+
+    /**
+     * Constructor for SubCommands
+     * @param plugin Instance of the main plugin class
+     */
+    public ReloadCommand(Main plugin) {
+        super(plugin);
+    }
 
     @Override
     public String getCommand() {

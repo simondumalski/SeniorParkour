@@ -1,9 +1,9 @@
-package me.simondumalski.seniorparkour.configs;
+package me.simondumalski.seniorparkour.data.parkour;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.managers.MessageManager;
-import me.simondumalski.seniorparkour.utils.Log;
-import me.simondumalski.seniorparkour.utils.Parkour;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.messaging.Log;
+import me.simondumalski.seniorparkour.parkour.Parkour;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,11 +15,19 @@ import java.util.logging.Level;
 
 public class ParkourDataConfig {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
 
     private final String FILE_NAME = "parkour-data.yml";
     private File dataFile;
     private YamlConfiguration dataConfig;
+
+    /**
+     * Constructor for the ParkourDataConfig
+     * @param plugin Instance of the main plugin class
+     */
+    public ParkourDataConfig(Main plugin) {
+        this.plugin = plugin;
+    }
 
     /**
      * Saves the Parkour Courses to file

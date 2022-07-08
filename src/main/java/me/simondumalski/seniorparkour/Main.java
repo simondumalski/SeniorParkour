@@ -1,17 +1,21 @@
 package me.simondumalski.seniorparkour;
 
 import me.simondumalski.seniorparkour.commands.ParkourCommand;
-import me.simondumalski.seniorparkour.configs.ParkourDataConfig;
-import me.simondumalski.seniorparkour.listeners.GUIInteractListener;
-import me.simondumalski.seniorparkour.listeners.HologramInteractListener;
+import me.simondumalski.seniorparkour.data.parkour.ParkourDataConfig;
+import me.simondumalski.seniorparkour.data.database.DatabaseManager;
+import me.simondumalski.seniorparkour.holograms.HologramManager;
+import me.simondumalski.seniorparkour.menus.GUIInteractListener;
+import me.simondumalski.seniorparkour.holograms.HologramInteractListener;
 import me.simondumalski.seniorparkour.listeners.PlayerQuitListener;
-import me.simondumalski.seniorparkour.managers.*;
-import me.simondumalski.seniorparkour.tasks.IncrementTimerTask;
+import me.simondumalski.seniorparkour.menus.InventoryManager;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.parkour.ParkourManager;
+import me.simondumalski.seniorparkour.parkour.TrialManager;
+import me.simondumalski.seniorparkour.parkour.tasks.IncrementTimerTask;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
-    private static Main instance;
     private ParkourManager parkourManager;
     private HologramManager hologramManager;
     private TrialManager trialManager;
@@ -22,40 +26,40 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        //Initialize the main plugin class instance variable
-        instance = this;
-
-        //Initialize the plugin managers
-        parkourManager = new ParkourManager();
-        hologramManager = new HologramManager();
-        trialManager = new TrialManager();
-        inventoryManager = new InventoryManager();
-
         //Initialize the config.yml
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         reloadConfig();
 
+        //Initialize the MessageManager
+        MessageManager.setPlugin(this);
+
+        //Initialize the plugin managers
+        parkourManager = new ParkourManager(this);
+        hologramManager = new HologramManager(this);
+        trialManager = new TrialManager(this);
+        inventoryManager = new InventoryManager(this);
+
         //Initialize and load the parkour-data.yml file
-        parkourDataConfig = new ParkourDataConfig();
+        parkourDataConfig = new ParkourDataConfig(this);
         parkourDataConfig.initialize();
         parkourDataConfig.loadData();
 
         //Initialize the DatabaseManager and connect to the database
-        databaseManager = new DatabaseManager();
+        databaseManager = new DatabaseManager(this);
         databaseManager.connect();
         databaseManager.prepareDatabase();
 
         //Register the event listeners
-        getServer().getPluginManager().registerEvents(new HologramInteractListener(), this);
-        getServer().getPluginManager().registerEvents(new PlayerQuitListener(), this);
-        getServer().getPluginManager().registerEvents(new GUIInteractListener(), this);
+        getServer().getPluginManager().registerEvents(new HologramInteractListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
+        getServer().getPluginManager().registerEvents(new GUIInteractListener(this), this);
 
         //Set the command executors
-        getCommand("parkour").setExecutor(new ParkourCommand());
+        getCommand("parkour").setExecutor(new ParkourCommand(this));
 
         //Schedule the tasks
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new IncrementTimerTask(), 20L, 20L);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new IncrementTimerTask(this), 20L, 20L);
 
     }
 
@@ -101,14 +105,6 @@ public final class Main extends JavaPlugin {
                 + ((remainingMinutes < 10) ? "0" : "") + remainingMinutes + "m "
                 + ((remainingSeconds < 10) ? "0" : "") + remainingSeconds + "s";
 
-    }
-
-    /**
-     * Returns the instance of the Main plugin class
-     * @return Main plugin class
-     */
-    public static Main getInstance() {
-        return instance;
     }
 
     /**

@@ -1,4 +1,4 @@
-package me.simondumalski.seniorparkour.utils;
+package me.simondumalski.seniorparkour.parkour;
 
 import org.bukkit.Location;
 

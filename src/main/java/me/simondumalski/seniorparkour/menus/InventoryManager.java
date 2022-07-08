@@ -1,7 +1,7 @@
-package me.simondumalski.seniorparkour.managers;
+package me.simondumalski.seniorparkour.menus;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.utils.Parkour;
+import me.simondumalski.seniorparkour.parkour.Parkour;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,7 +16,15 @@ import java.util.*;
 
 public class InventoryManager {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
+
+    /**
+     * Constructor for the InventoryManager
+     * @param plugin Instance of the main plugin class
+     */
+    public InventoryManager(Main plugin) {
+        this.plugin = plugin;
+    }
 
     public void openInfoInventory(Player player, Parkour parkour) {
 

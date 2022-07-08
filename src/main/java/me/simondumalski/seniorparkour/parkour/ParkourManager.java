@@ -1,7 +1,6 @@
-package me.simondumalski.seniorparkour.managers;
+package me.simondumalski.seniorparkour.parkour;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.utils.Parkour;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
@@ -9,8 +8,16 @@ import java.util.List;
 
 public class ParkourManager {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
     private final List<Parkour> parkourCourses = new ArrayList<>();
+
+    /**
+     * Constructor for the ParkourManager
+     * @param plugin Instance of the main plugin class
+     */
+    public ParkourManager(Main plugin) {
+        this.plugin = plugin;
+    }
 
     /**
      * Returns the list of Parkour Courses

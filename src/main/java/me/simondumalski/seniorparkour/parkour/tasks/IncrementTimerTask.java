@@ -1,8 +1,8 @@
-package me.simondumalski.seniorparkour.tasks;
+package me.simondumalski.seniorparkour.parkour.tasks;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.managers.MessageManager;
-import me.simondumalski.seniorparkour.utils.Message;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.messaging.Message;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -11,7 +11,15 @@ import java.util.UUID;
 
 public class IncrementTimerTask implements Runnable {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
+
+    /**
+     * Constructor for the IncrementTimerTask
+     * @param plugin Instance of the main pugin class
+     */
+    public IncrementTimerTask(Main plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public void run() {

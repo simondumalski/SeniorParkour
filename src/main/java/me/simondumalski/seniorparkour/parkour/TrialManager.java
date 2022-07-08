@@ -1,7 +1,6 @@
-package me.simondumalski.seniorparkour.managers;
+package me.simondumalski.seniorparkour.parkour;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.utils.Parkour;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -11,10 +10,18 @@ import java.util.UUID;
 
 public class TrialManager {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
     private final HashMap<UUID, Parkour> playersInParkour = new HashMap<>();
     private final HashMap<UUID, Location> playersInParkourLocation = new HashMap<>();
     private final HashMap<UUID, Integer> timeInParkour = new HashMap<>();
+
+    /**
+     * Constructor for the TrialManager
+     * @param plugin Instance of the main plugin class
+     */
+    public TrialManager(Main plugin) {
+        this.plugin = plugin;
+    }
 
     /**
      * Returns the UUIDs of the players that are currently in a Parkour Trial

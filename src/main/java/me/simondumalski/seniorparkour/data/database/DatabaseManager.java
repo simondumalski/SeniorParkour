@@ -1,8 +1,9 @@
-package me.simondumalski.seniorparkour.managers;
+package me.simondumalski.seniorparkour.data.database;
 
 import me.simondumalski.seniorparkour.Main;
-import me.simondumalski.seniorparkour.utils.Log;
-import me.simondumalski.seniorparkour.utils.Parkour;
+import me.simondumalski.seniorparkour.messaging.Log;
+import me.simondumalski.seniorparkour.messaging.MessageManager;
+import me.simondumalski.seniorparkour.parkour.Parkour;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
@@ -12,19 +13,23 @@ import java.util.logging.Level;
 
 public class DatabaseManager {
 
-    private final Main plugin = Main.getInstance();
+    private final Main plugin;
 
     private final String HOST;
     private final int PORT;
     private final String DATABASE;
     private final String USERNAME;
     private final String PASSWORD;
-
     private final String CONNECTION_URL;
-
     private Connection connection;
 
-    public DatabaseManager() {
+    /**
+     * Constructor for the DatabaseManager
+     * @param plugin Instance of the main plugin class
+     */
+    public DatabaseManager(Main plugin) {
+
+        this.plugin = plugin;
 
         HOST = plugin.getConfig().getString("mysql.host");
         PORT = plugin.getConfig().getInt("mysql.port");
@@ -103,6 +108,9 @@ public class DatabaseManager {
 
             }
 
+            statsCheck.close();
+            set1.close();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -123,6 +131,8 @@ public class DatabaseManager {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM playerdata WHERE course_name = ?;");
             statement.setString(1, courseName);
             statement.executeUpdate();
+
+            statement.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -163,6 +173,9 @@ public class DatabaseManager {
 
             }
 
+            statement.close();
+            resultSet.close();
+
             return dataHashmap;
 
         } catch (SQLException ex) {
@@ -197,6 +210,9 @@ public class DatabaseManager {
                 data.put(playerUUID, timeCompleted);
 
             }
+
+            statement.close();
+            resultSet.close();
 
             return data;
 
@@ -249,6 +265,7 @@ public class DatabaseManager {
             //Create the PlayerData table if it does not exist
             PreparedStatement createTables = connection.prepareStatement("CREATE TABLE IF NOT EXISTS playerdata ( uuid varchar(36) NOT NULL, course_name varchar(100) NOT NULL, time_completed int(11) NOT NULL );");
             createTables.executeUpdate();
+            createTables.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();

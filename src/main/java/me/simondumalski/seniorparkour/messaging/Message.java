@@ -1,4 +1,4 @@
-package me.simondumalski.seniorparkour.utils;
+package me.simondumalski.seniorparkour.messaging;
 
 public enum Message {
 
